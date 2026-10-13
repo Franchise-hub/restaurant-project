@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scintillicious Sweets N More | Restaurant, Cakes &amp; Event Planning in Lagos</title>
+<meta name="description" content="Scintillicious Sweets N More is a Lagos restaurant, bakery and event planner. Cakes, pastries, small chops, food trays and catering for weddings, birthdays and corporate events.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+  --burgundy: #6B0F1A;
+  --burgundy-deep: #4A0A12;
+  --cream: #FFF8E7;
+  --cream-deep: #F6EAC9;
+  --gold: #D4AF37;
+  --gold-soft: #E9D18A;
+  --dark: #222222;
+  --muted: #5d5551;
+  --error: #b3261e;
+  --radius: 18px;
+  --shadow: 0 18px 40px -22px rgba(74, 10, 18, .45);
+  --header-h: 76px;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: var(--header-h); }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--dark);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.15; margin: 0 0 .6em; font-weight: 600; }
+p { margin: 0 0 1em; }
+ul { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+.container { width: min(1180px, 100% - 2.5rem); margin-inline: auto; }
+.band { padding: clamp(4rem, 8vw, 7rem) 0; }
+.band-tint { background: var(--cream-deep); }
+.section-head { max-width: 640px; margin: 0 auto clamp(2.2rem, 5vw, 3.5rem); text-align: center; }
+.section-head h2 { font-size: clamp(2rem, 4.4vw, 3rem); color: var(--burgundy); }
+.section-head p { color: var(--muted); margin: 0; }
+.rule { display: block; width: 74px; height: 3px; margin: 0 auto 1.2rem; background: linear-gradient(90deg, transparent, var(--gold), transparent); border: 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .85rem 1.7rem; border-radius: 999px; border: 2px solid transparent;
+  font: 500 .95rem/1 var(--sans); text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); color: var(--burgundy-deep); box-shadow: 0 10px 24px -12px rgba(212,175,55,.9); }
+.btn-gold:hover { background: #e2bf4a; }
+.btn-outline-light { border-color: var(--cream); color: var(--cream); background: transparent; }
+.btn-outline-light:hover { background: var(--cream); color: var(--burgundy); }
+.btn-burgundy { background: var(--burgundy); color: var(--cream); }
+.btn-burgundy:hover { background: var(--burgundy-deep); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50; height: var(--header-h);
+  background: rgba(255, 248, 231, .94);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.site-header.scrolled { border-bottom-color: rgba(212,175,55,.55); box-shadow: 0 10px 30px -22px rgba(74,10,18,.6); }
+.header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font-family: var(--serif); font-size: 1.65rem; font-weight: 700; color: var(--burgundy); letter-spacing: .01em; }
+.logo svg { width: 22px; height: 22px; fill: var(--gold); flex: none; }
+.nav-list { display: flex; align-items: center; gap: 2rem; }
+.nav-list a { text-decoration: none; font-weight: 500; font-size: .95rem; color: var(--dark); position: relative; padding: .3rem 0; }
+.nav-list a:not(.btn)::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.nav-list a:not(.btn):hover::after { transform: scaleX(1); }
+.header-cta { padding: .7rem 1.4rem; }
+.nav-list .header-cta { color: var(--cream); padding: .7rem 1.4rem; }
+.menu-toggle { display: none; width: 46px; height: 46px; border: 0; border-radius: 12px; background: transparent; cursor: pointer; padding: 0; position: relative; }
+.menu-toggle span { position: absolute; left: 11px; right: 11px; height: 2px; background: var(--burgundy); border-radius: 2px; transition: transform .25s ease, opacity .2s ease, top .25s ease; }
+.menu-toggle span:nth-child(1) { top: 16px; }
+.menu-toggle span:nth-child(2) { top: 22px; }
+.menu-toggle span:nth-child(3) { top: 28px; }
+.menu-toggle[aria-expanded="true"] span:nth-child(1) { top: 22px; transform: rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded="true"] span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; overflow: hidden; color: var(--cream);
+  background:
+    radial-gradient(900px 500px at 85% 20%, rgba(212,175,55,.18), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(0,0,0,.28), transparent 60%),
+    var(--burgundy);
+  padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(4rem, 8vw, 7rem);
+}
+.hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.hero h1 { font-size: clamp(2.6rem, 6.2vw, 4.9rem); font-weight: 700; margin-bottom: .4em; letter-spacing: -.01em; }
+.hero .tagline { font-family: var(--serif); font-style: italic; font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--gold-soft); margin-bottom: 1.1rem; }
+.hero .sub { max-width: 520px; color: rgba(255,248,231,.86); font-weight: 300; font-size: 1.05rem; margin-bottom: 2rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: .9rem; }
+.hero-art { position: relative; justify-self: center; width: min(100%, 460px); }
+.arch {
+  position: relative; aspect-ratio: 4 / 5; border-radius: 999px 999px 28px 28px; overflow: hidden;
+  border: 3px solid var(--gold); padding: 10px; background: var(--burgundy-deep);
+  box-shadow: 0 40px 70px -35px rgba(0,0,0,.8);
+}
+.arch .img-wrap { width: 100%; height: 100%; border-radius: 999px 999px 18px 18px; overflow: hidden; }
+.arch img { width: 100%; height: 100%; object-fit: cover; }
+.hero-chip {
+  position: absolute; left: -8%; bottom: 9%; width: 38%; aspect-ratio: 1; border-radius: 50%;
+  border: 4px solid var(--cream); overflow: hidden; box-shadow: 0 20px 40px -20px rgba(0,0,0,.7); background: var(--burgundy-deep);
+}
+.hero-chip img { width: 100%; height: 100%; object-fit: cover; }
+.hero-badge {
+  position: absolute; right: -4%; top: 14%; background: var(--cream); color: var(--burgundy);
+  border-radius: 16px; padding: .7rem 1rem; box-shadow: var(--shadow); font-size: .85rem; line-height: 1.35; font-weight: 500;
+}
+.hero-badge strong { display: block; font-family: var(--serif); font-size: 1.15rem; }
+.sparkle-field { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sparkle { position: absolute; width: var(--s, 14px); height: var(--s, 14px); background: var(--gold); opacity: 0;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  animation: twinkle var(--d, 4s) ease-in-out var(--delay, 0s) infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4) rotate(0deg); } 50% { opacity: .9; transform: scale(1) rotate(45deg); } }
+
+/* ---------- Image fallback ---------- */
+.img-wrap.noimg { background: linear-gradient(135deg, var(--burgundy) 0%, #8e1f2c 55%, var(--gold) 140%); }
+
+/* ---------- About ---------- */
+.about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.about-art { position: relative; padding-bottom: 14%; }
+.about-main { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 4.4; box-shadow: var(--shadow); background: var(--cream-deep); }
+.about-main img { width: 100%; height: 100%; object-fit: cover; }
+.about-sub { position: absolute; right: -6%; bottom: 0; width: 46%; aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; border: 6px solid var(--cream); box-shadow: var(--shadow); background: var(--cream-deep); }
+.about-sub img { width: 100%; height: 100%; object-fit: cover; }
+.about-copy h2 { font-size: clamp(2rem, 4.2vw, 2.9rem); color: var(--burgundy); }
+.about-copy p { color: var(--muted); }
+.about-stats { display: flex; flex-wrap: wrap; gap: 1.2rem 2.5rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid rgba(212,175,55,.6); }
+.about-stats div { min-width: 110px; }
+.about-stats strong { display: block; font-family: var(--serif); font-size: 1.9rem; color: var(--burgundy); line-height: 1.1; }
+.about-stats span { font-size: .88rem; color: var(--muted); }
+
+/* ---------- Services ---------- */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.service {
+  background: #fffdf6; border: 1px solid rgba(212,175,55,.45); border-radius: var(--radius);
+  padding: 2rem 1.7rem 2rem; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.service:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--gold); }
+.service .icon { width: 58px; height: 58px; border-radius: 50%; background: var(--burgundy); display: grid; place-items: center; margin-bottom: 1.2rem; }
+.service .icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.service h3 { font-size: 1.35rem; color: var(--burgundy); margin-bottom: .45em; }
+.service p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* ---------- Menu ---------- */
+.filters { display: flex; justify-content: center; flex-wrap: wrap; gap: .6rem; margin-bottom: 2.2rem; }
+.filter { border: 1.5px solid var(--burgundy); background: transparent; color: var(--burgundy); border-radius: 999px; padding: .55rem 1.3rem; font: 500 .9rem var(--sans); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+.filter:hover { background: rgba(107,15,26,.08); }
+.filter[aria-pressed="true"] { background: var(--burgundy); color: var(--cream); }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+.dish { background: #fffdf6; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(212,175,55,.35); display: flex; flex-direction: column; transition: box-shadow .25s ease, transform .25s ease; }
+.dish:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+.dish[hidden] { display: none; }
+.thumb { all: unset; display: block; position: relative; cursor: zoom-in; overflow: hidden; aspect-ratio: 4 / 3; width: 100%; background: var(--cream-deep); }
+.thumb:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+.thumb .img-wrap { display: block; width: 100%; height: 100%; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.thumb:hover img { transform: scale(1.07); }
+.thumb::after { content: "View larger"; position: absolute; left: 50%; bottom: 14px; transform: translate(-50%, 12px); background: rgba(34,34,34,.78); color: var(--cream); font-size: .78rem; padding: .35rem .85rem; border-radius: 999px; opacity: 0; transition: opacity .25s ease, transform .25s ease; }
+.thumb:hover::after, .thumb:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.dish-body { padding: 1.2rem 1.4rem 1.4rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+.dish-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.dish h3 { font-size: 1.2rem; margin: 0; color: var(--dark); }
+.price { font-family: var(--serif); font-weight: 700; font-size: 1.2rem; color: var(--burgundy); white-space: nowrap; }
+.dish p { margin: 0; font-size: .9rem; color: var(--muted); }
+.dish .order-link { margin-top: auto; padding-top: .8rem; font-weight: 500; font-size: .9rem; color: var(--burgundy); text-decoration: none; border-bottom: 1px solid var(--gold); align-self: flex-start; }
+.dish .order-link:hover { color: var(--burgundy-deep); border-bottom-width: 2px; }
+.menu-note { text-align: center; margin: 2.2rem 0 0; font-size: .9rem; color: var(--muted); }
+
+/* ---------- Why choose us ---------- */
+.why { background: var(--burgundy); color: var(--cream); position: relative; overflow: hidden; }
+.why::before { content: ""; position: absolute; inset: 0; background: radial-gradient(700px 360px at 10% 0%, rgba(212,175,55,.16), transparent 65%); pointer-events: none; }
+.why .section-head h2 { color: var(--cream); }
+.why .section-head p { color: rgba(255,248,231,.8); }
+.why-grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
+.why-item { text-align: center; padding: 0 1rem; }
+.why-item .ring { width: 78px; height: 78px; border-radius: 50%; border: 2px solid var(--gold); display: grid; place-items: center; margin: 0 auto 1.3rem; }
+.why-item .ring svg { width: 34px; height: 34px; stroke: var(--gold); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.why-item h3 { font-size: 1.5rem; color: var(--gold-soft); }
+.why-item p { margin: 0 auto; max-width: 320px; color: rgba(255,248,231,.84); font-weight: 300; }
+
+/* ---------- Testimonials ---------- */
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.quote { background: #fffdf6; border-radius: var(--radius); padding: 2rem 1.8rem; border: 1px solid rgba(212,175,55,.45); display: flex; flex-direction: column; gap: 1rem; }
+.stars { color: var(--gold); letter-spacing: .15em; font-size: 1.05rem; }
+.quote blockquote { margin: 0; font-family: var(--serif); font-size: 1.12rem; line-height: 1.6; color: var(--dark); }
+.quote figcaption { margin-top: auto; font-size: .9rem; color: var(--muted); }
+.quote figcaption strong { display: block; color: var(--burgundy); font-weight: 600; }
+.quote { margin: 0; }
+
+/* ---------- Contact ---------- */
+.contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.contact-info h2 { font-size: clamp(2rem, 4.2vw, 2.9rem); color: var(--burgundy); }
+.contact-info > p { color: var(--muted); }
+.info-list { display: grid; gap: 1.1rem; margin-top: 1.8rem; }
+.info-list li { display: flex; gap: 1rem; align-items: flex-start; }
+.info-list .ico { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--burgundy); display: grid; place-items: center; }
+.info-list .ico svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.info-list strong { display: block; color: var(--burgundy); font-weight: 600; line-height: 1.4; }
+.info-list span, .info-list a { font-size: .95rem; color: var(--muted); text-decoration: none; }
+.info-list a:hover { color: var(--burgundy); text-decoration: underline; }
+.form-card { background: #fffdf6; border: 1px solid rgba(212,175,55,.55); border-radius: 24px; padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow); }
+.form-card h3 { font-size: 1.5rem; color: var(--burgundy); }
+.field { margin-bottom: 1.1rem; }
+.field label { display: block; font-size: .9rem; font-weight: 500; margin-bottom: .35rem; color: var(--dark); }
+.field input, .field select, .field textarea {
+  width: 100%; font: 400 1rem var(--sans); color: var(--dark); background: var(--cream);
+  border: 1.5px solid #e0d3ae; border-radius: 12px; padding: .8rem 1rem; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.28); }
+.field.invalid input, .field.invalid select, .field.invalid textarea { border-color: var(--error); }
+.field .err { display: none; color: var(--error); font-size: .82rem; margin-top: .3rem; }
+.field.invalid .err { display: block; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-card .btn { width: 100%; margin-top: .4rem; padding: 1rem; font-size: 1rem; }
+.form-fine { text-align: center; font-size: .82rem; color: var(--muted); margin: .9rem 0 0; }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--dark); color: rgba(255,248,231,.78); padding: 4rem 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; padding-bottom: 3rem; }
+.site-footer .logo { color: var(--gold); margin-bottom: .9rem; }
+.site-footer h4 { font-family: var(--serif); font-size: 1.15rem; color: var(--cream); margin: 0 0 1rem; font-weight: 600; }
+.site-footer p { font-size: .93rem; font-weight: 300; max-width: 340px; }
+.footer-links { display: grid; gap: .55rem; font-size: .93rem; }
+.footer-links a { text-decoration: none; transition: color .2s ease; }
+.footer-links a:hover { color: var(--gold); }
+.socials { display: flex; gap: .7rem; margin-top: 1.2rem; }
+.socials a { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid rgba(212,175,55,.6); display: grid; place-items: center; transition: background-color .2s ease, transform .2s ease; }
+.socials a:hover { background: var(--gold); transform: translateY(-3px); }
+.socials svg { width: 19px; height: 19px; stroke: var(--gold); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: stroke .2s ease; }
+.socials a:hover svg { stroke: var(--burgundy-deep); }
+.footer-bottom { border-top: 1px solid rgba(255,248,231,.14); padding: 1.3rem 0; text-align: center; font-size: .85rem; }
+
+/* ---------- WhatsApp float ---------- */
+.wa-float {
+  position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; display: grid; place-items: center; box-shadow: 0 14px 28px -10px rgba(0,0,0,.5);
+  transition: transform .2s ease;
+}
+.wa-float:hover { transform: scale(1.08); }
+.wa-float svg { width: 32px; height: 32px; fill: #fff; }
+
+/* ---------- Lightbox ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(20,4,7,.92); display: none; align-items: center; justify-content: center; padding: 1.5rem; }
+.lightbox.open { display: flex; }
+.lightbox figure { margin: 0; max-width: min(960px, 100%); max-height: 100%; text-align: center; }
+.lightbox img { max-height: 76vh; width: auto; margin: 0 auto; border-radius: 14px; border: 2px solid var(--gold); }
+.lightbox figcaption { color: var(--cream); margin-top: 1rem; font-family: var(--serif); font-size: 1.2rem; }
+.lightbox figcaption span { color: var(--gold-soft); margin-left: .6rem; }
+.lb-btn { position: absolute; background: rgba(255,248,231,.12); border: 1px solid rgba(212,175,55,.6); color: var(--cream); width: 48px; height: 48px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; display: grid; place-items: center; transition: background-color .2s ease; }
+.lb-btn:hover { background: rgba(212,175,55,.35); }
+.lb-close { top: 18px; right: 18px; }
+.lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 18px; top: 50%; transform: translateY(-50%); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-art { order: -1; width: min(100%, 380px); }
+  .about-art { max-width: 520px; margin: 0 auto; }
+  .services-grid, .menu-grid, .quotes { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; gap: 2.6rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > div:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .menu-toggle { display: block; }
+  .nav { position: absolute; top: var(--header-h); left: 0; right: 0; background: var(--cream); border-bottom: 1px solid rgba(212,175,55,.55); box-shadow: 0 24px 30px -24px rgba(74,10,18,.6); display: none; }
+  .nav.open { display: block; }
+  .nav-list { flex-direction: column; align-items: stretch; gap: 0; padding: .8rem 1.25rem 1.4rem; }
+  .nav-list li { border-bottom: 1px solid rgba(212,175,55,.3); }
+  .nav-list li:last-child { border-bottom: 0; padding-top: 1rem; }
+  .nav-list a:not(.btn) { display: block; padding: .9rem 0; }
+  .nav-list a:not(.btn)::after { display: none; }
+}
+@media (max-width: 620px) {
+  .services-grid, .menu-grid, .quotes, .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-chip { left: -2%; }
+  .hero-badge { right: 0; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .lb-prev, .lb-next { top: auto; bottom: 20px; transform: none; }
+  .lb-prev { left: calc(50% - 60px); }
+  .lb-next { right: calc(50% - 60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+  .sparkle { opacity: .55; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#top" class="logo" aria-label="Scintillicious Sweets N More, home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0l2.9 8.3L24 12l-9.1 3.7L12 24l-2.9-8.3L0 12l9.1-3.7z"/></svg>
+      Scintillicious
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://wa.me/2348000000000?text=Hello%20Scintillicious%2C%20I%27d%20like%20to%20place%20an%20order." class="btn btn-burgundy header-cta" data-wa target="_blank" rel="noopener">Order Now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="sparkle-field" id="sparkles" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="tagline">Every Bite Sparkles, Every Event Shines</p>
+      <h1 id="hero-title">We Make Your Events Unforgettable</h1>
+      <p class="sub">From showstopping celebration cakes and small chops to full wedding, birthday and corporate catering, Scintillicious Sweets N More brings taste and elegance to every table in Lagos.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/2348000000000?text=Hello%20Scintillicious%2C%20I%27d%20like%20to%20place%20an%20order." class="btn btn-gold" data-wa target="_blank" rel="noopener">Order Now</a>
+        <a href="#contact" class="btn btn-outline-light">Plan Your Event</a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="arch">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=900&q=80" alt="An elegant celebration cake decorated with fresh berries" fetchpriority="high">
+        </div>
+      </div>
+      <div class="hero-chip">
+        <div class="img-wrap" style="width:100%;height:100%">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=500&q=80" alt="A beautifully styled event table" loading="lazy">
+        </div>
+      </div>
+      <div class="hero-badge"><strong>Weddings &middot; Birthdays</strong>Corporate events &amp; more</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="band" id="about" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div class="about-art">
+      <div class="about-main img-wrap">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80" alt="Freshly baked pastries on a table" loading="lazy">
+      </div>
+      <div class="about-sub img-wrap">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Glazed doughnuts on a cake stand" loading="lazy">
+      </div>
+    </div>
+
+    <div class="about-copy">
+      <h2 id="about-title">A little sparkle in every kitchen, every celebration</h2>
+      <p>Scintillicious Sweets N More started with one oven, one big love for sugar and a belief that every celebration deserves food people talk about for weeks. Today we are a Lagos restaurant, bakery and event team under one roof.</p>
+      <p>We bake our cakes and pastries fresh, cook our small chops and party trays from scratch, and plan events down to the last napkin, so you can enjoy your own party.</p>
+      <div class="about-stats">
+        <div><strong>6</strong><span>Ways we serve you</span></div>
+        <div><strong>100%</strong><span>Made fresh daily</span></div>
+        <div><strong>Lagos</strong><span>Delivered across the city</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="band band-tint" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-head">
+      <hr class="rule">
+      <h2 id="services-title">Everything your table needs</h2>
+      <p>Order a single cake or hand us the whole event. We cover the sweet, the savoury and the setup.</p>
+    </div>
+
+    <div class="services-grid">
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M3 12h18v3a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6z"/><path d="M8 12v2M12 12v3M16 12v2"/></svg></div>
+        <h3>Cakes &amp; Pastries</h3>
+        <p>Custom celebration cakes, cupcakes, cookies and buttery pastries baked fresh to your flavour and design.</p>
+      </article>
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2.5 1.5-4 4.5-4 8h4"/></svg></div>
+        <h3>Restaurant Dining</h3>
+        <p>Sit down for freshly cooked Nigerian and continental meals in a warm, elegant setting.</p>
+      </article>
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M12 13l1 2 2 .3-1.5 1.4.4 2.1-1.9-1-1.9 1 .4-2.1L9 15.3l2-.3z"/></svg></div>
+        <h3>Event Planning</h3>
+        <p>Concept, decor, vendors and timeline. We plan weddings, birthdays and corporate events end to end.</p>
+      </article>
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15h18"/><path d="M5 15a7 7 0 0 1 14 0"/><path d="M12 8V6"/><path d="M10 6h4"/><path d="M4 19h16"/></svg></div>
+        <h3>Catering Services</h3>
+        <p>Full-service catering with buffet setup, servers and clean-up for crowds of 30 to 1,000 guests.</p>
+      </article>
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="4"/><circle cx="16.5" cy="9.5" r="3.5"/><circle cx="12" cy="17" r="4"/></svg></div>
+        <h3>Small Chops &amp; Finger Foods</h3>
+        <p>Puff puff, samosa, spring rolls, peppered snail and more, packed hot and ready to share.</p>
+      </article>
+      <article class="service">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="10" rx="2"/><path d="M6 9a6 6 0 0 1 12 0"/><path d="M9 14h6"/></svg></div>
+        <h3>Food Trays</h3>
+        <p>Party jollof, fried rice, grilled chicken, assorted meat and sides in trays sized for your guest list.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU GALLERY ============ -->
+<section class="band" id="menu" aria-labelledby="menu-title">
+  <div class="container">
+    <div class="section-head">
+      <hr class="rule">
+      <h2 id="menu-title">Our best-loved menu</h2>
+      <p>A taste of what leaves our kitchen every day. Tap any photo to see it larger.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter menu">
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter" type="button" data-filter="sweet" aria-pressed="false">Cakes &amp; Pastries</button>
+      <button class="filter" type="button" data-filter="savoury" aria-pressed="false">Savoury &amp; Trays</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <article class="dish" data-cat="sweet">
+        <button class="thumb" type="button" aria-label="View Chocolate Fudge Cake larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" alt="Rich chocolate celebration cake" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Chocolate Fudge Cake</h3><span class="price">₦28,000</span></div>
+          <p>Three layers of moist chocolate sponge with silky fudge ganache.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Chocolate Fudge Cake" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+
+      <article class="dish" data-cat="sweet">
+        <button class="thumb" type="button" aria-label="View Strawberry Cream Cake larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=900&q=80" alt="Cream cake topped with fresh strawberries" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Strawberry Cream Cake</h3><span class="price">₦35,000</span></div>
+          <p>Vanilla sponge, whipped cream and fresh strawberries. A birthday favourite.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Strawberry Cream Cake" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+
+      <article class="dish" data-cat="sweet">
+        <button class="thumb" type="button" aria-label="View Butter Croissant Box larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80" alt="Golden butter croissants" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Butter Croissant Box</h3><span class="price">₦15,000</span></div>
+          <p>Twelve flaky, golden croissants baked fresh each morning.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Butter Croissant Box" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+
+      <article class="dish" data-cat="savoury">
+        <button class="thumb" type="button" aria-label="View Small Chops Platter larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=900&q=80" alt="Platter of assorted small chops and finger foods" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Small Chops Platter</h3><span class="price">₦25,000</span></div>
+          <p>Puff puff, samosa, spring rolls, mini sausage rolls and chicken wings for 10 guests.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Small Chops Platter" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+
+      <article class="dish" data-cat="savoury">
+        <button class="thumb" type="button" aria-label="View Party Jollof and Chicken Tray larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Plated food with grilled chicken and sides" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Party Jollof &amp; Chicken Tray</h3><span class="price">₦45,000</span></div>
+          <p>Smoky party jollof with grilled chicken and fried plantain, serves 10 to 12.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Party Jollof & Chicken Tray" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+
+      <article class="dish" data-cat="savoury">
+        <button class="thumb" type="button" aria-label="View Restaurant Signature Plate larger">
+          <span class="img-wrap"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Elegantly plated restaurant dish" loading="lazy"></span>
+        </button>
+        <div class="dish-body">
+          <div class="dish-top"><h3>Restaurant Signature Plate</h3><span class="price">₦8,500</span></div>
+          <p>Our chef's daily plate with a protein, rich sauce and two sides.</p>
+          <a class="order-link" href="https://wa.me/2348000000000" data-wa-item="Restaurant Signature Plate" target="_blank" rel="noopener">Order this</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="menu-note">Prices are starting prices. Custom cakes and large trays are quoted to your order.</p>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="band why" id="why" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section-head">
+      <hr class="rule">
+      <h2 id="why-title">Why Lagos celebrates with us</h2>
+      <p>Three promises we keep on every order.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c4.4 0 8-3.1 8-7.5C20 9 15 6 12 2 9 6 4 9 4 14.5 4 18.9 7.6 22 12 22z"/><path d="M12 12v5M9.5 14.5h5"/></svg></div>
+        <h3>Fresh Daily</h3>
+        <p>Nothing sits on a shelf. We bake and cook the day you need it, with quality ingredients.</p>
+      </div>
+      <div class="why-item">
+        <div class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg></div>
+        <h3>On-Time Delivery</h3>
+        <p>Your cake and trays arrive when promised, so your event never waits on the food.</p>
+      </div>
+      <div class="why-item">
+        <div class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9.3l-4 4 1 5.7-5-2.8L7 19l1-5.7-4-4 5.5-.8z"/></svg></div>
+        <h3>Custom Made</h3>
+        <p>Your colours, your theme, your flavours. Every order is shaped around your celebration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="band" id="testimonials" aria-labelledby="testi-title">
+  <div class="container">
+    <div class="section-head">
+      <hr class="rule">
+      <h2 id="testi-title">Kind words from happy tables</h2>
+      <p>What clients say after the last slice is gone.</p>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>Our wedding cake was the talk of the reception, and the small chops finished before the speeches did. Every guest asked who the caterer was.</blockquote>
+        <figcaption><strong>Adaeze &amp; Tunde O.</strong>Wedding, Lekki</figcaption>
+      </figure>
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>They delivered 80 food trays to our office on time and still hot. Our team has asked for Scintillicious at every event since.</blockquote>
+        <figcaption><strong>Ngozi A.</strong>Corporate lunch, Victoria Island</figcaption>
+      </figure>
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>I described my daughter's unicorn party in a few lines and the cake looked even better than my idea. Moist, not too sweet, perfect.</blockquote>
+        <figcaption><strong>Bimpe K.</strong>Birthday party, Ikeja</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="band band-tint" id="contact" aria-labelledby="contact-title">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <h2 id="contact-title">Let's plan something delicious</h2>
+      <p>Tell us what you're celebrating and we'll reply with ideas and a quote. Prefer to chat? Message us on WhatsApp.</p>
+
+      <ul class="info-list">
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><strong>Visit us</strong><span>12 Example Street, Victoria Island, Lagos, Nigeria</span></div>
+        </li>
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+          <div><strong>Call or WhatsApp</strong><a href="tel:+2348000000000">+234 800 000 0000</a></div>
+        </li>
+        <li>
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><strong>Opening hours</strong><span>Mon to Sat, 8am to 8pm &middot; Sun, 12pm to 7pm</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <form class="form-card" id="contactForm" novalidate>
+      <h3>Request a quote</h3>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name">
+          <div class="err">Enter your full name.</div>
+        </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="080 1234 5678">
+          <div class="err">Enter a valid Nigerian phone number.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="eventType">Event type</label>
+        <select id="eventType" name="eventType">
+          <option value="">Select an event type</option>
+          <option>Wedding</option>
+          <option>Birthday</option>
+          <option>Corporate event</option>
+          <option>Cake or pastry order</option>
+          <option>Small chops or food trays</option>
+          <option>Other</option>
+        </select>
+        <div class="err">Choose an event type.</div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Date, number of guests, location and anything you have in mind"></textarea>
+        <div class="err">Tell us a little more (at least 10 characters).</div>
+      </div>
+
+      <button type="submit" class="btn btn-burgundy">Send request</button>
+      <p class="form-fine">After you send, we'll open WhatsApp so you can confirm your details with us.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="#top" class="logo">Scintillicious</a>
+      <p>Scintillicious Sweets N More. Restaurant, cakes, small chops, food trays and event planning in Lagos, Nigeria.</p>
+      <div class="socials" aria-label="Social media">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg></a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+        <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M16 3c.3 2.2 1.8 3.7 4 4"/></svg></a>
+        <a href="https://wa.me/2348000000000" data-wa target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.6-4.9A8.5 8.5 0 1 1 8 19.5z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 .7c-.8-.4-1.600-1.200-2-2l.7-1-1-2z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul class="footer-links">
+        <li><a href="#about">About us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul class="footer-links">
+        <li>12 Example Street, Victoria Island, Lagos</li>
+        <li><a href="tel:+2348000000000">+234 800 000 0000</a></li>
+        <li>Mon to Sat, 8am to 8pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; <span id="year">2026</span> Scintillicious Sweets N More. All rights reserved.</div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="wa-float" href="https://wa.me/2348000000000?text=Hello%20Scintillicious%2C%20I%27d%20like%20to%20make%20an%20enquiry." data-wa target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C8.84 3 3 8.8 3 15.96c0 2.28.6 4.5 1.74 6.46L3 29l6.76-1.7a13.1 13.1 0 0 0 6.28 1.6C23.2 28.9 29 23.1 29 15.96 29 8.8 23.2 3 16.04 3zm0 23.7c-1.96 0-3.88-.52-5.56-1.5l-.4-.24-4.02 1.02 1.06-3.9-.26-.4a10.6 10.6 0 0 1-1.64-5.7c0-5.9 4.82-10.7 10.82-10.7 5.9 0 10.7 4.8 10.7 10.7s-4.8 10.72-10.7 10.72zm5.9-8c-.32-.16-1.9-.94-2.2-1.04-.3-.1-.5-.16-.72.16-.22.32-.84 1.04-1.02 1.26-.2.2-.38.24-.7.08-1.9-.94-3.14-1.7-4.4-3.84-.34-.58.34-.54.96-1.8.1-.2.06-.4-.02-.56-.08-.16-.72-1.74-1-2.38-.26-.62-.52-.54-.72-.54h-.6c-.2 0-.56.08-.84.4-.3.32-1.12 1.1-1.12 2.68s1.14 3.1 1.3 3.32c.16.2 2.26 3.44 5.46 4.84 2.02.88 2.82.96 3.84.8.62-.1 1.9-.78 2.16-1.52.26-.76.26-1.4.18-1.54-.08-.14-.3-.22-.62-.38z"/></svg>
+</a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Menu photo viewer">
+  <button class="lb-btn lb-close" id="lbClose" type="button" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">&#8249;</button>
+  <figure>
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Settings: change these to your real details ---------- */
+  var WHATSAPP_NUMBER = "2348000000000"; // country code + number, no "+" or spaces
+
+  var waBase = "https://wa.me/" + WHATSAPP_NUMBER;
+
+  /* Point every WhatsApp link at the number above */
+  document.querySelectorAll("a[data-wa]").forEach(function (a) {
+    var url = a.getAttribute("href") || "";
+    var q = url.indexOf("?");
+    a.setAttribute("href", waBase + (q > -1 ? url.slice(q) : ""));
+  });
+  document.querySelectorAll("a[data-wa-item]").forEach(function (a) {
+    var msg = "Hello Scintillicious, I'd like to order: " + a.getAttribute("data-wa-item");
+    a.setAttribute("href", waBase + "?text=" + encodeURIComponent(msg));
+  });
+
+  /* ---------- Images that fail to load fall back to a branded block ---------- */
+  document.querySelectorAll(".img-wrap img").forEach(function (img) {
+    img.addEventListener("error", function () {
+      img.parentElement.classList.add("noimg");
+      img.style.display = "none";
+    });
+  });
+
+  /* ---------- Footer year ---------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ---------- Header shadow on scroll ---------- */
+  var header = document.querySelector(".site-header");
+  function onScroll() { header.classList.toggle("scrolled", window.scrollY > 10); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobile menu ---------- */
+  var toggle = document.getElementById("menuToggle");
+  var nav = document.getElementById("nav");
+  function setMenu(open) {
+    nav.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  toggle.addEventListener("click", function () {
+    setMenu(toggle.getAttribute("aria-expanded") !== "true");
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && nav.classList.contains("open")) { setMenu(false); toggle.focus(); }
+  });
+  window.addEventListener("resize", function () { if (window.innerWidth > 860) setMenu(false); });
+
+  /* ---------- Smooth scroll ---------- */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = link.getAttribute("href");
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      setMenu(false);
+      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      history.replaceState(null, "", id);
+    });
+  });
+  var logo = document.querySelector(".logo");
+  logo.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  });
+
+  /* ---------- Hero sparkles ---------- */
+  var field = document.getElementById("sparkles");
+  for (var i = 0; i < 16; i++) {
+    var s = document.createElement("span");
+    s.className = "sparkle";
+    s.style.left = (Math.random() * 100) + "%";
+    s.style.top = (Math.random() * 100) + "%";
+    s.style.setProperty("--s", (8 + Math.random() * 16).toFixed(0) + "px");
+    s.style.setProperty("--d", (3 + Math.random() * 3).toFixed(1) + "s");
+    s.style.setProperty("--delay", (Math.random() * 4).toFixed(1) + "s");
+    field.appendChild(s);
+  }
+
+  /* ---------- Menu filter ---------- */
+  var filters = document.querySelectorAll(".filter");
+  var dishes = document.querySelectorAll(".dish");
+  filters.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var cat = btn.getAttribute("data-filter");
+      filters.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+      dishes.forEach(function (d) {
+        d.hidden = !(cat === "all" || d.getAttribute("data-cat") === cat);
+      });
+    });
+  });
+
+  /* ---------- Lightbox ---------- */
+  var lb = document.getElementById("lightbox");
+  var lbImg = document.getElementById("lbImg");
+  var lbCap = document.getElementById("lbCap");
+  var lastFocus = null;
+  var current = 0;
+
+  function visibleDishes() {
+    return Array.prototype.filter.call(dishes, function (d) { return !d.hidden; });
+  }
+  function showDish(index) {
+    var list = visibleDishes();
+    if (!list.length) return;
+    current = (index + list.length) % list.length;
+    var d = list[current];
+    var img = d.querySelector("img");
+    lbImg.src = img.src.replace(/w=\d+/, "w=1400");
+    lbImg.alt = img.alt;
+    lbCap.innerHTML = "";
+    lbCap.appendChild(document.createTextNode(d.querySelector("h3").textContent));
+    var price = document.createElement("span");
+    price.textContent = d.querySelector(".price").textContent;
+    lbCap.appendChild(price);
+  }
+  function openLightbox(dish) {
+    lastFocus = document.activeElement;
+    showDish(visibleDishes().indexOf(dish));
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  }
+  function closeLightbox() {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+    lbImg.src = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  dishes.forEach(function (d) {
+    d.querySelector(".thumb").addEventListener("click", function () { openLightbox(d); });
+  });
+  document.getElementById("lbClose").addEventListener("click", closeLightbox);
+  document.getElementById("lbPrev").addEventListener("click", function () { showDish(current - 1); });
+  document.getElementById("lbNext").addEventListener("click", function () { showDish(current + 1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLightbox(); });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showDish(current - 1);
+    if (e.key === "ArrowRight") showDish(current + 1);
+  });
+
+  /* ---------- Contact form validation ---------- */
+  var form = document.getElementById("contactForm");
+
+  function setInvalid(input, bad) {
+    input.closest(".field").classList.toggle("invalid", bad);
+    input.setAttribute("aria-invalid", String(bad));
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var name = form.elements.name;
+    var phone = form.elements.phone;
+    var type = form.elements.eventType;
+    var message = form.elements.message;
+
+    var phoneClean = phone.value.replace(/[\s\-()]/g, "");
+    var checks = [
+      { el: name, bad: name.value.trim().length < 2, msg: "Please enter your full name." },
+      { el: phone, bad: !/^(\+?234|0)[789][01]\d{8}$/.test(phoneClean), msg: "Please enter a valid Nigerian phone number, for example 08012345678." },
+      { el: type, bad: !type.value, msg: "Please choose an event type." },
+      { el: message, bad: message.value.trim().length < 10, msg: "Please tell us a little more in your message (at least 10 characters)." }
+    ];
+
+    var problems = [];
+    var firstBad = null;
+    checks.forEach(function (c) {
+      setInvalid(c.el, c.bad);
+      if (c.bad) { problems.push("• " + c.msg); if (!firstBad) firstBad = c.el; }
+    });
+
+    if (problems.length) {
+      alert("Please fix the following:\n\n" + problems.join("\n"));
+      firstBad.focus();
+      return;
+    }
+
+    var text =
+      "Hello Scintillicious, I'd like a quote.\n" +
+      "Name: " + name.value.trim() + "\n" +
+      "Phone: " + phone.value.trim() + "\n" +
+      "Event: " + type.value + "\n" +
+      "Details: " + message.value.trim();
+
+    alert("Thank you, " + name.value.trim().split(" ")[0] + "! We'll now open WhatsApp so you can send your request to us.");
+    window.open(waBase + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+    form.reset();
+    checks.forEach(function (c) { setInvalid(c.el, false); });
+  });
+
+  /* Clear a field's error as soon as the person edits it */
+  form.querySelectorAll("input, select, textarea").forEach(function (el) {
+    el.addEventListener("input", function () { setInvalid(el, false); });
+  });
+})();
+</script>
+</body>
+</html>
